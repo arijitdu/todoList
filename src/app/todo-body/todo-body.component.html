@@ -1,0 +1,23 @@
+<mat-card class="todo-card">
+  <mat-checkbox class="example-margin" [indeterminate]="someComplete()" (change)="checkAllOrNone($event.checked)">Check All/None</mat-checkbox>
+  <ng-container *ngIf="todoList.length > 0; then thenTemplate; else elseTemplate"></ng-container>
+  <ng-template #thenTemplate>
+    <mat-nav-list>
+      <mat-list-item *ngFor="let todo of todoList">
+         <div matLine [ngClass]="{'strike': todo.isChecked}">{{ todo.name }}</div>
+         <button mat-icon-button (click)="deleteTodo(todo)" *ngIf="todo.isChecked">
+            <mat-icon>delete_outline</mat-icon>
+         </button>
+         <mat-checkbox class="example-margin" [checked]="todo.isChecked" (change)="updateTodo(todo)">
+      </mat-checkbox>
+      </mat-list-item>
+    </mat-nav-list>
+
+  </ng-template>
+  <ng-template #elseTemplate>
+    <div class="mat-headline center full-width">No TODO Added! Please add one.</div>
+  </ng-template>
+  <button mat-fab color="accent" class="fab-pos" (click)="createTodo()">
+    <mat-icon>add</mat-icon>
+  </button>
+</mat-card>

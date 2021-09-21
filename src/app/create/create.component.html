@@ -1,0 +1,17 @@
+<h1 mat-dialog-title>Hi There, Please add TODO here</h1>
+<div mat-dialog-content>
+ <form [formGroup]="todoForm">
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Todo Name</mat-label>
+    <input matInput placeholder="Placeholder" formControlName="todoName">
+    <mat-icon matSuffix>grading</mat-icon>
+    <mat-hint>You can add any todo here</mat-hint>
+    <mat-error *ngIf="todoForm.controls['todoName'].hasError('required')">This is required</mat-error>
+    <mat-error *ngIf="todoForm.controls['todoName'].hasError('minlength')">Minimum 3 character long it should be</mat-error>
+  </mat-form-field>
+ </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">CANCEL</button>
+  <button mat-button (click)="onSubmit()" cdkFocusInitial>ADD</button>
+</div>
